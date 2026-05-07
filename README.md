@@ -1,4 +1,4 @@
-# sisc-rookie-web - 🚀 세투연 행사 운영 플랫폼 (Setuyen Event Management Platform)
+# 🚀 세투연 행사 운영 플랫폼 (SISC Event Management Platform)
 
 세투연(투자 동아리)의 다양한 행사(신입 OT, 기업분석 세미나, 스터디, 네트워킹 등)를 효율적으로 관리하고 운영하기 위해 제작된 **실서비스형 미니 플랫폼**입니다. 
 
