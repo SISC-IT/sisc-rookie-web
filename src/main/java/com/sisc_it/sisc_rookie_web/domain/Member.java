@@ -22,7 +22,7 @@ public class Member {
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
 
     private String profileImageUrl;
 
@@ -33,15 +33,15 @@ public class Member {
     protected Member() {
     }
 
-    public Member(String name, String email, String password, Role role) {
+    public Member(String name, String email, String passwordHash, Role role) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.role = role;
     }
 
-    public Member(String name, String email, String password, String profileImageUrl, Role role) {
-        this(name, email, password, role);
+    public Member(String name, String email, String passwordHash, String profileImageUrl, Role role) {
+        this(name, email, passwordHash, role);
         this.profileImageUrl = profileImageUrl;
     }
 
@@ -69,12 +69,12 @@ public class Member {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getProfileImageUrl() {
