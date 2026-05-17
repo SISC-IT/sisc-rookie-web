@@ -1,5 +1,6 @@
-package com.sisc_it.sisc_rookie_web.domain;
+package com.sisc_it.sisc_rookie_web.member.domain;
 
+import com.sisc_it.sisc_rookie_web.team.domain.Team;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,12 +28,12 @@ public class Member {
     @Setter
     private String name;
 
-    // 이메일 변경은 중복 확인이 필요하므로 컨트롤러에서 바로 엔티티 setter를 호출하지 말고 DTO와 서비스 검증을 거친다.
+    // Email changes require duplicate checks. Route them through a DTO and service validation.
     @Column(nullable = false, unique = true)
     @Setter
     private String email;
 
-    // 원문 비밀번호를 받는 DTO와 암호화 서비스가 생기면 그 경로에서만 갱신한다.
+    // Accept raw passwords through DTOs only, then hash them in service code before updating this field.
     @Column(nullable = false)
     @Setter
     private String passwordHash;
@@ -45,7 +46,7 @@ public class Member {
     @Setter
     private Role role;
 
-    // 팀 이동은 권한과 정원 같은 정책이 붙을 수 있으므로 DTO와 서비스 검증을 거친다.
+    // Team changes can involve permissions and capacity rules, so validate them in service code.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     @Setter

@@ -1,4 +1,4 @@
-package com.sisc_it.sisc_rookie_web.domain;
+package com.sisc_it.sisc_rookie_web.event.domain;
 
 public enum EventStatus {
     DRAFT,

@@ -6,15 +6,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sisc_it.sisc_rookie_web.domain.Application;
-import com.sisc_it.sisc_rookie_web.domain.ApplicationStatus;
-import com.sisc_it.sisc_rookie_web.domain.Event;
-import com.sisc_it.sisc_rookie_web.domain.EventStatus;
-import com.sisc_it.sisc_rookie_web.domain.Feedback;
-import com.sisc_it.sisc_rookie_web.domain.Member;
-import com.sisc_it.sisc_rookie_web.domain.Position;
-import com.sisc_it.sisc_rookie_web.domain.Role;
-import com.sisc_it.sisc_rookie_web.domain.Team;
+import com.sisc_it.sisc_rookie_web.application.domain.Application;
+import com.sisc_it.sisc_rookie_web.application.domain.ApplicationStatus;
+import com.sisc_it.sisc_rookie_web.application.repository.ApplicationRepository;
+import com.sisc_it.sisc_rookie_web.event.domain.Event;
+import com.sisc_it.sisc_rookie_web.event.domain.EventStatus;
+import com.sisc_it.sisc_rookie_web.event.repository.EventRepository;
+import com.sisc_it.sisc_rookie_web.feedback.domain.Feedback;
+import com.sisc_it.sisc_rookie_web.feedback.repository.FeedbackRepository;
+import com.sisc_it.sisc_rookie_web.member.domain.Member;
+import com.sisc_it.sisc_rookie_web.member.domain.Position;
+import com.sisc_it.sisc_rookie_web.member.domain.Role;
+import com.sisc_it.sisc_rookie_web.member.repository.MemberRepository;
+import com.sisc_it.sisc_rookie_web.team.domain.Team;
+import com.sisc_it.sisc_rookie_web.team.repository.TeamRepository;
 
 @SpringBootTest
 class DomainRepositoryTest {

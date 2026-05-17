@@ -1,4 +1,4 @@
-package com.sisc_it.sisc_rookie_web.domain;
+package com.sisc_it.sisc_rookie_web.team.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +18,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 팀명 변경은 중복 확인이 필요하므로 DTO와 서비스 검증을 거친 뒤 갱신한다.
+    // Team name changes require duplicate checks, so route updates through DTO and service code.
     @Column(nullable = false, unique = true)
     @Setter
     private String name;
