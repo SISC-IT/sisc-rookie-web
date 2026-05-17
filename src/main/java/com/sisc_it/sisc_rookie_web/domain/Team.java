@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "teams")
 public class Team {
@@ -19,7 +18,9 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 팀명 변경은 중복 확인이 필요하므로 DTO와 서비스 검증을 거친 뒤 갱신한다.
     @Column(nullable = false, unique = true)
+    @Setter
     private String name;
 
     protected Team() {
