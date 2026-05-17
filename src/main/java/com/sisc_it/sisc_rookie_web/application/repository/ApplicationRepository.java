@@ -1,8 +1,8 @@
-package com.sisc_it.sisc_rookie_web.repository;
+package com.sisc_it.sisc_rookie_web.application.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.sisc_it.sisc_rookie_web.domain.Application;
+import com.sisc_it.sisc_rookie_web.application.domain.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
 

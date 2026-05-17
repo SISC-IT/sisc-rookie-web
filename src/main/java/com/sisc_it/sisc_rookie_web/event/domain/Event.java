@@ -1,7 +1,8 @@
-package com.sisc_it.sisc_rookie_web.domain;
+package com.sisc_it.sisc_rookie_web.event.domain;
 
 import java.time.LocalDateTime;
 
+import com.sisc_it.sisc_rookie_web.member.domain.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,11 +40,11 @@ public class Event {
     @Setter
     private EventStatus status;
 
-    // 시스템이 기록하는 값이므로 외부 setter를 열지 않는다.
+    // Managed by the system, so no public setter.
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    // 작성자는 이벤트 생성 시점에 확정한다. 변경이 필요하면 DTO와 권한 검증을 거친 서비스 메서드로 처리한다.
+    // Fixed at creation. Changing the creator should go through a DTO and permission check in service code.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by", nullable = false)
     private Member createdBy;

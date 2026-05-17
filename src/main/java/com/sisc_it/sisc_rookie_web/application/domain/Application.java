@@ -1,7 +1,10 @@
-package com.sisc_it.sisc_rookie_web.domain;
+package com.sisc_it.sisc_rookie_web.application.domain;
 
 import java.time.LocalDateTime;
 
+import com.sisc_it.sisc_rookie_web.event.domain.Event;
+import com.sisc_it.sisc_rookie_web.member.domain.Member;
+import com.sisc_it.sisc_rookie_web.team.domain.Team;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,7 +35,7 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 신청 대상 관계는 생성 시점에 확정한다. 변경 API가 필요하면 DTO와 서비스 검증을 먼저 둔다.
+    // Fixed at creation. Changing application ownership should go through a DTO and service validation.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
@@ -50,7 +53,7 @@ public class Application {
     @Setter
     private ApplicationStatus status;
 
-    // 시스템이 기록하는 값이므로 외부 setter를 열지 않는다.
+    // Managed by the system, so no public setter.
     @Column(name = "applied_at", nullable = false)
     private LocalDateTime appliedAt;
 
