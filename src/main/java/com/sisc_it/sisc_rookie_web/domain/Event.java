@@ -18,7 +18,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "events")
 public class Event {
@@ -28,18 +27,23 @@ public class Event {
     private Long id;
 
     @Column(nullable = false)
+    @Setter
     private String title;
 
     @Column(nullable = false, length = 2000)
+    @Setter
     private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Setter
     private EventStatus status;
 
+    // 시스템이 기록하는 값이므로 외부 setter를 열지 않는다.
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    // 작성자는 이벤트 생성 시점에 확정한다. 변경이 필요하면 DTO와 권한 검증을 거친 서비스 메서드로 처리한다.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by", nullable = false)
     private Member createdBy;

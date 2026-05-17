@@ -17,7 +17,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 @Table(
     name = "feedbacks",
@@ -31,6 +30,7 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 피드백 대상 관계는 생성 시점에 확정한다. 수정 요청은 DTO와 서비스 권한 검증을 거쳐 content만 바꾼다.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
@@ -44,8 +44,10 @@ public class Feedback {
     private Team team;
 
     @Column(nullable = false, length = 2000)
+    @Setter
     private String content;
 
+    // 시스템이 기록하는 값이므로 외부 setter를 열지 않는다.
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
