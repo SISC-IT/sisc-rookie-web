@@ -1,0 +1,126 @@
+package com.sisc_it.sisc_rookie_web.domain;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
+@Entity
+@Table(
+    name = "applications",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "uk_application_event_member", columnNames = {"event_id", "member_id"})
+    }
+)
+public class Application {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ApplicationStatus status;
+
+    @Column(name = "applied_at", nullable = false)
+    private LocalDateTime appliedAt;
+
+    @Column(name = "is_attended", nullable = false)
+    private boolean attended;
+
+    protected Application() {
+    }
+
+    public Application(Event event, Member member) {
+        this(event, member, member.getTeam(), ApplicationStatus.PENDING);
+    }
+
+    public Application(Event event, Member member, Team team, ApplicationStatus status) {
+        this.event = event;
+        this.member = member;
+        this.team = team;
+        this.status = status;
+        this.attended = false;
+    }
+
+    @PrePersist
+    void prePersist() {
+        if (appliedAt == null) {
+            appliedAt = LocalDateTime.now();
+        }
+        if (status == null) {
+            status = ApplicationStatus.PENDING;
+        }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public ApplicationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getAppliedAt() {
+        return appliedAt;
+    }
+
+    public boolean isAttended() {
+        return attended;
+    }
+
+    public void setAttended(boolean attended) {
+        this.attended = attended;
+    }
+}

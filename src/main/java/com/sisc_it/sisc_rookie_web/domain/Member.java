@@ -4,11 +4,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "members")
 public class Member {
 
     @Id
@@ -30,6 +35,14 @@ public class Member {
     @Column(nullable = false)
     private Role role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Position position;
+
     protected Member() {
     }
 
@@ -38,11 +51,18 @@ public class Member {
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
+        this.position = Position.MEMBER;
     }
 
     public Member(String name, String email, String passwordHash, String profileImageUrl, Role role) {
         this(name, email, passwordHash, role);
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public Member(String name, String email, String passwordHash, String profileImageUrl, Role role, Team team, Position position) {
+        this(name, email, passwordHash, profileImageUrl, role);
+        this.team = team;
+        this.position = position;
     }
 
     public Long getId() {
@@ -91,5 +111,21 @@ public class Member {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }
