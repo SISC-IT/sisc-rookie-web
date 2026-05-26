@@ -19,11 +19,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.jayway.jsonpath.JsonPath;
-import com.sisc_it.sisc_rookie_web.event.domain.EventStatus;
-import com.sisc_it.sisc_rookie_web.event.repository.EventRepository;
-import com.sisc_it.sisc_rookie_web.member.domain.Member;
-import com.sisc_it.sisc_rookie_web.member.domain.Role;
-import com.sisc_it.sisc_rookie_web.member.repository.MemberRepository;
+import com.sisc_it.sisc_rookie_web.domain.EventStatus;
+import com.sisc_it.sisc_rookie_web.domain.Member;
+import com.sisc_it.sisc_rookie_web.domain.Role;
+import com.sisc_it.sisc_rookie_web.repository.EventRepository;
+import com.sisc_it.sisc_rookie_web.repository.MemberRepository;
 
 @SpringBootTest
 class EventControllerTest {

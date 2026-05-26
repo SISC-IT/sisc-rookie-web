@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sisc_it.sisc_rookie_web.event.domain.Event;
-import com.sisc_it.sisc_rookie_web.event.domain.EventStatus;
+import com.sisc_it.sisc_rookie_web.domain.Event;
+import com.sisc_it.sisc_rookie_web.domain.EventStatus;
+import com.sisc_it.sisc_rookie_web.domain.Member;
 import com.sisc_it.sisc_rookie_web.event.dto.EventCreateRequest;
 import com.sisc_it.sisc_rookie_web.event.dto.EventResponse;
 import com.sisc_it.sisc_rookie_web.event.dto.EventUpdateRequest;
-import com.sisc_it.sisc_rookie_web.event.repository.EventRepository;
-import com.sisc_it.sisc_rookie_web.member.domain.Member;
-import com.sisc_it.sisc_rookie_web.member.repository.MemberRepository;
+import com.sisc_it.sisc_rookie_web.repository.EventRepository;
+import com.sisc_it.sisc_rookie_web.repository.MemberRepository;
 
 @Service
 @Transactional(readOnly = true)

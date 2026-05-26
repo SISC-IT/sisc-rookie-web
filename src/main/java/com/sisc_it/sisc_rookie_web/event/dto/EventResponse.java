@@ -2,8 +2,8 @@ package com.sisc_it.sisc_rookie_web.event.dto;
 
 import java.time.LocalDateTime;
 
-import com.sisc_it.sisc_rookie_web.event.domain.Event;
-import com.sisc_it.sisc_rookie_web.event.domain.EventStatus;
+import com.sisc_it.sisc_rookie_web.domain.Event;
+import com.sisc_it.sisc_rookie_web.domain.EventStatus;
 
 public record EventResponse(
     Long id,
