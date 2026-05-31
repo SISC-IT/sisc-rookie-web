@@ -2,6 +2,7 @@ package com.sisc_it.sisc_rookie_web.global.security;
 
 import java.io.IOException;
 
+import com.sisc_it.sisc_rookie_web.global.exception.AuthErrorCode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -43,9 +44,9 @@ public class SecurityConfig {
             )
             .exceptionHandling(exception -> exception
                 .authenticationEntryPoint((request, response, authException) ->
-                    writeErrorResponse(response, ErrorCode.UNAUTHORIZED))
+                    writeErrorResponse(response, AuthErrorCode.UNAUTHORIZED))
                 .accessDeniedHandler((request, response, accessDeniedException) ->
-                    writeErrorResponse(response, ErrorCode.FORBIDDEN))
+                    writeErrorResponse(response, AuthErrorCode.FORBIDDEN))
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
@@ -56,7 +57,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    private void writeErrorResponse(HttpServletResponse response, ErrorCode errorCode) throws IOException {
+    private void writeErrorResponse(HttpServletResponse response, AuthErrorCode errorCode) throws IOException {
         response.setStatus(errorCode.getStatus().value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
