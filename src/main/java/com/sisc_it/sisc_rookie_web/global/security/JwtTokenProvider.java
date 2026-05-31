@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.sisc_it.sisc_rookie_web.global.exception.AuthErrorCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -72,12 +73,12 @@ public class JwtTokenProvider {
         try {
             String[] parts = token.split("\\.");
             if (parts.length != 3) {
-                throw new BusinessException(ErrorCode.INVALID_TOKEN);
+                throw new BusinessException(AuthErrorCode.INVALID_TOKEN);
             }
 
             String unsignedToken = parts[0] + "." + parts[1];
             if (!sign(unsignedToken).equals(parts[2])) {
-                throw new BusinessException(ErrorCode.INVALID_TOKEN);
+                throw new BusinessException(AuthErrorCode.INVALID_TOKEN);
             }
 
             Map<String, Object> claims = objectMapper.readValue(
@@ -87,14 +88,14 @@ public class JwtTokenProvider {
             );
             Number expiration = (Number) claims.get("exp");
             if (expiration == null || expiration.longValue() < Instant.now().getEpochSecond()) {
-                throw new BusinessException(ErrorCode.INVALID_TOKEN);
+                throw new BusinessException(AuthErrorCode.INVALID_TOKEN);
             }
 
             return claims;
         } catch (BusinessException exception) {
             throw exception;
         } catch (Exception exception) {
-            throw new BusinessException(ErrorCode.INVALID_TOKEN);
+            throw new BusinessException(AuthErrorCode.INVALID_TOKEN);
         }
     }
 

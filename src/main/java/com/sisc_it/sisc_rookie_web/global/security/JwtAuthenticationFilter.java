@@ -2,6 +2,7 @@ package com.sisc_it.sisc_rookie_web.global.security;
 
 import java.io.IOException;
 
+import com.sisc_it.sisc_rookie_web.global.exception.AuthErrorCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,7 +66,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private void writeInvalidTokenResponse(HttpServletResponse response) throws IOException {
-        ErrorCode errorCode = ErrorCode.INVALID_TOKEN;
+        AuthErrorCode errorCode = AuthErrorCode.INVALID_TOKEN;
         response.setStatus(errorCode.getStatus().value());
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
