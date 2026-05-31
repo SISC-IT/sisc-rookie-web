@@ -63,7 +63,7 @@ public class SecurityConfig {
         response.setCharacterEncoding("UTF-8");
         objectMapper.writeValue(
             response.getWriter(),
-            ApiResponse.error(errorCode.getStatus().value(), errorCode.getMessage())
+            ApiResponse.error(errorCode.getStatus().value(), errorCode.getCode(), errorCode.getMessage())
         );
     }
 }
